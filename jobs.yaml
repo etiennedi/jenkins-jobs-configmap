@@ -1,0 +1,9 @@
+---
+jobs:
+  - name: sample-job
+    git:
+      enabled: true
+      remoteName: "origin"
+      remoteURL: "git@github.com/bar/foo.git"
+      jenkinsCredentialsID: "foobar"
+      branches: "*/master"
