@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -48,9 +49,11 @@ func main() {
 	os.MkdirAll(jobsFolder, os.ModePerm)
 
 	for _, job := range input.Jobs {
-		path, _ := filepath.Abs("./jobs/" + job.Name + ".xml")
+		relativePath := "./jobs/" + job.Name + ".xml"
+		path, _ := filepath.Abs(relativePath)
 		jobXML, err := os.Create(path)
 		check(err)
 		check(t.Execute(jobXML, job))
+		fmt.Printf("succesfully created job %s\n", relativePath)
 	}
 }
