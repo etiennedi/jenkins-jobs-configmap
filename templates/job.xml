@@ -8,7 +8,8 @@
       <parameters/>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description></description>
+  <description>{{ .Description }}</description>
+  <displayName>{{ .DisplayName }}</displayName>
   <keepDependencies>false</keepDependencies>
   <properties>
 {{- if .DisableConcurrentBuilds -}}
@@ -16,6 +17,11 @@
 {{- end -}}
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers>
+{{- if .Triggers.Timer.Enabled -}}
+        <hudson.triggers.TimerTrigger>
+          <spec>{{ .Triggers.Timer.Schedule }}</spec>
+        </hudson.triggers.TimerTrigger>
+{{- end -}}
 {{- if .Triggers.SCMPolling.Enabled -}}
         <hudson.triggers.SCMTrigger>
           <spec>{{ .Triggers.SCMPolling.Schedule }}</spec>

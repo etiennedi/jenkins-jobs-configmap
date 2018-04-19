@@ -1,6 +1,8 @@
 ---
 jobs:
   - name: sample-job
+    displayName: A sample Job
+    description: possibly the best sample job
     git:
       enabled: true
       remoteName: "origin"

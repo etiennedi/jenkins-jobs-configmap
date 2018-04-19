@@ -19,20 +19,29 @@ type Git struct {
 }
 
 type SCMPolling struct {
-	Enabled               bool
-	Schedule              string
-	IgnorePostCommitHooks bool
+	Enabled               bool   `yaml:"enabled"`
+	Schedule              string `yaml:"schedule"`
+	IgnorePostCommitHooks bool   `yaml:"ignorePostCommitHooks"`
+}
+
+type Timer struct {
+	Enabled               bool   `yaml:"enabled"`
+	Schedule              string `yaml:"schedule"`
+	IgnorePostCommitHooks bool   `yaml:"ignorePostCommitHooks"`
 }
 
 type Triggers struct {
-	SCMPolling SCMPolling
+	SCMPolling SCMPolling `yaml:"scmPolling"`
+	Timer      Timer      `yaml:"timer"`
 }
 
 type Job struct {
-	Git                     Git    `yaml:"git"`
-	Name                    string `yaml:"name"`
-	DisableConcurrentBuilds bool
-	Triggers                Triggers
+	Git                     Git      `yaml:"git"`
+	Name                    string   `yaml:"name"`
+	DisplayName             string   `yaml:"displayName"`
+	Description             string   `yaml:"description"`
+	DisableConcurrentBuilds bool     `yaml:"disableConcurrentBuilds"`
+	Triggers                Triggers `yaml:"triggers"`
 }
 
 type Input struct {
