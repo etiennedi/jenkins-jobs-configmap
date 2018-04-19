@@ -44,7 +44,13 @@ func main() {
 	t, err := template.ParseFiles("./templates/job.xml")
 	check(err)
 
+	jobsFolder := filepath.Join(".", "jobs")
+	os.MkdirAll(jobsFolder, os.ModePerm)
+
 	for _, job := range input.Jobs {
-		check(t.Execute(os.Stdout, job))
+		path, _ := filepath.Abs("./jobs/" + job.Name + ".xml")
+		jobXML, err := os.Create(path)
+		check(err)
+		check(t.Execute(jobXML, job))
 	}
 }
