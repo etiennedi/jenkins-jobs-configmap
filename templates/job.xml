@@ -11,12 +11,17 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+{{- if .DisableConcurrentBuilds -}}
+    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty/>
+{{- end -}}
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers>
+{{- if .Triggers.SCMPolling.Enabled -}}
         <hudson.triggers.SCMTrigger>
-          <spec>H/2 * * * *</spec>
-          <ignorePostCommitHooks>false</ignorePostCommitHooks>
+          <spec>{{ .Triggers.SCMPolling.Schedule }}</spec>
+          <ignorePostCommitHooks>{{ .Triggers.SCMPolling.IgnorePostCommitHooks }}</ignorePostCommitHooks>
         </hudson.triggers.SCMTrigger>
+{{- end -}}
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>

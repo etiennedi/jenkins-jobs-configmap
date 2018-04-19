@@ -18,9 +18,21 @@ type Git struct {
 	Branches             string `yaml:"branches"`
 }
 
+type SCMPolling struct {
+	Enabled               bool
+	Schedule              string
+	IgnorePostCommitHooks bool
+}
+
+type Triggers struct {
+	SCMPolling SCMPolling
+}
+
 type Job struct {
-	Git  Git    `yaml:"git"`
-	Name string `yaml:"name"`
+	Git                     Git    `yaml:"git"`
+	Name                    string `yaml:"name"`
+	DisableConcurrentBuilds bool
+	Triggers                Triggers
 }
 
 type Input struct {
