@@ -8,6 +8,12 @@ Current State: Very minimal yaml to xml parser (template based)
 
 Clone and modify `jobs.yaml`. Run `go run main.go` and check `jobs/` folder for output.
 
+## Possible Roadmap (subject to change)
+
+* Run this tool in an initContainer alongside Jenkins to configure jobs at startup
+* Run as sidecar container to constantly watch updates and make adding of new jobs possible without having to restart Jenkins
+  * At this point it probably makes sense to save the configuration in CRDs rather than config maps
+
 ## Sample `jobs.yaml`:
 
 ```yaml
